@@ -15,6 +15,10 @@ func Title(title string) {
 	color.New(color.Bold).Println(title)
 }
 
+func Titlef(format string, a ...any) {
+	Title(fmt.Sprintf(format, a...))
+}
+
 func Infof(format string, a ...any) {
 	msg := fmt.Sprintf(format, a...)
 	fmt.Printf("%s%s\n", infoPrefix, msg)
