@@ -2,6 +2,7 @@ package archive
 
 import (
 	"fmt"
+	"os"
 	"runtime"
 
 	"github.com/carolynvs/magex/pkg/archive"
@@ -18,6 +19,10 @@ func Download(bin string, opts archive.DownloadArchiveOptions) error {
 
 	if opts.Hook == nil {
 		opts.Hook = archive.ExtractBinaryFromArchiveHook(opts)
+	}
+
+	if err := os.MkdirAll(bin, os.ModePerm); err != nil {
+		return err
 	}
 
 	return downloads.Download(bin, opts.DownloadOptions)
