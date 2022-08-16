@@ -30,22 +30,27 @@ func MustCmdf(format string, a ...interface{}) *Command {
 	return lo.Must1(Cmdf(format, a...))
 }
 
-func (c Command) Run() error {
+func (c *Command) Run() error {
 	printer.Cmd(c.String())
 	return c.PreparedCommand.Run()
 }
 
-func (c Command) RunV() error {
+func (c *Command) RunV() error {
 	printer.Cmd(c.String())
 	return c.PreparedCommand.RunV()
 }
 
-func (c Command) RunE() error {
+func (c *Command) RunE() error {
 	printer.Cmd(c.String())
 	return c.PreparedCommand.RunE()
 }
 
-func (c Command) RunS() error {
+func (c *Command) RunS() error {
 	printer.Cmd(c.String())
 	return c.PreparedCommand.RunS()
+}
+
+func (c *Command) In(dir string) *Command {
+	c.PreparedCommand = c.PreparedCommand.In(dir)
+	return c
 }
