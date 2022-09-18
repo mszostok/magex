@@ -1,7 +1,10 @@
 package shx
 
 import (
+	"context"
 	"fmt"
+	"os"
+	"os/exec"
 
 	"github.com/carolynvs/magex/shx"
 	"github.com/mattn/go-shellwords"
@@ -23,6 +26,23 @@ func Cmdf(format string, a ...interface{}) (*Command, error) {
 
 	return &Command{
 		PreparedCommand: shx.Command(args[0], args[1:]...).Env(envs...),
+	}, nil
+}
+
+func CmdCtxf(ctx context.Context, format string, a ...interface{}) (*Command, error) {
+	rawCmd := fmt.Sprintf(format, a...)
+	envs, args, err := shellwords.ParseWithEnvs(rawCmd)
+	if err != nil {
+		return nil, err
+	}
+
+	c := exec.CommandContext(ctx, args[0], args[1:]...)
+	c.Stdout = os.Stdout
+	c.Stderr = os.Stderr
+	c.Env = os.Environ()
+
+	return &Command{
+		PreparedCommand: shx.PreparedCommand{Cmd: c}.Env(envs...),
 	}, nil
 }
 
