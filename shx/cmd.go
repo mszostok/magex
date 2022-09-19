@@ -70,6 +70,11 @@ func (c *Command) RunS() error {
 	return c.PreparedCommand.RunS()
 }
 
+func (c *Command) WithArg(name, val string) *Command {
+	c.Args(fmt.Sprintf("%s=%s", name, val))
+	return c
+}
+
 func (c *Command) In(dir string) *Command {
 	c.PreparedCommand = c.PreparedCommand.In(dir)
 	return c
