@@ -75,6 +75,11 @@ func (c *Command) WithArg(name, val string) *Command {
 	return c
 }
 
+func (c *Command) WithEnv(name, val string) *Command {
+	c.Env(fmt.Sprintf("%s=%s", name, val))
+	return c
+}
+
 func (c *Command) In(dir string) *Command {
 	c.PreparedCommand = c.PreparedCommand.In(dir)
 	return c

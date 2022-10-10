@@ -9,6 +9,7 @@ import (
 
 	archivex "go.szostok.io/magex/archive"
 	"go.szostok.io/magex/printer"
+	"go.szostok.io/magex/shx"
 )
 
 func EnsureGolangciLint(bin, version string) error {
@@ -81,4 +82,8 @@ func EnsureMdox(bin, version string) error {
 		Destination:    "bin",
 		DefaultVersion: version,
 	})
+}
+
+func EnsurePrettier(bin string) error {
+	return shx.MustCmdf(`npm install -D --prefix %s prettier`, bin).Run()
 }
