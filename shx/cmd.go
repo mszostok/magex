@@ -7,7 +7,7 @@ import (
 	"os/exec"
 
 	"github.com/carolynvs/magex/shx"
-	"github.com/mattn/go-shellwords"
+	"github.com/magefile/mage/mg"
 	"github.com/samber/lo"
 
 	"go.szostok.io/magex/printer"
@@ -53,6 +53,13 @@ func MustCmdf(format string, a ...interface{}) *Command {
 func (c *Command) Run() error {
 	printer.Cmd(c.String())
 	return c.PreparedCommand.Run()
+}
+
+func (c *Command) MustRun() {
+	if mg.Verbose() {
+		printer.Cmd(c.String())
+	}
+	lo.Must0(c.PreparedCommand.Run())
 }
 
 func (c *Command) RunV() error {
