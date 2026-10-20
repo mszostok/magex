@@ -1,6 +1,6 @@
 module go.szostok.io/magex
 
-go 1.18
+go 1.24
 
 require (
 	github.com/carolynvs/magex v0.9.0
@@ -14,7 +14,7 @@ require (
 	github.com/andybalholm/brotli v1.0.1 // indirect
 	github.com/dsnet/compress v0.0.2-0.20210315054119-f66993602bf5 // indirect
 	github.com/golang/snappy v0.0.2 // indirect
-	github.com/klauspost/compress v1.11.4 // indirect
+	github.com/klauspost/compress v1.18.7 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
 	github.com/magefile/mage v1.13.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
